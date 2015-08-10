@@ -3,6 +3,16 @@ language: python
 python:
   - 2.7
   
+before_install:
+  - apt-get install -y wget
+  - apt-get install -y libpq-dev
+  - apt-get install -y postgresql postgresql-contrib
+  - echo "host all all localhost trust" > /etc/postgresql/9.1/main/pg_hba.conf
+  - echo "local all all trust" >> /etc/postgresql/9.1/main/pg_hba.conf
+  - service postgresql start
+  - createuser -s root -U postgres
+  - psql --version
+  
 install:
   - pip install -r requirements.txt
 
