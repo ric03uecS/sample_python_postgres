@@ -7,7 +7,11 @@ before_install:
   - apt-get install -y wget
   - echo "deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main" >> /etc/apt/sources.list ;
   - wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
-  - apt-get -yy install postgresql-9.3 postgresql-contrib-9.3 postgresql-client-9.3
+  - apt-get -yy install postgresql-9.1 postgresql-contrib-9.1 postgresql-client-9.1
+  - echo "host all all localhost trust" > /etc/postgresql/9.1/main/pg_hba.conf
+  - echo "local all all trust" >> /etc/postgresql/9.1/main/pg_hba.conf
+  - service postgresql start
+  - createuser -s root -U postgres
   
 ##- apt-get install -y libpq-dev || true
 
